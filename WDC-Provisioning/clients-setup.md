@@ -17,5 +17,5 @@ Describes how to setup a windows machine and join AD.
     Run this script inside Terminal (Administrator)
 
     ```powershell
-    irm https://raw.githubusercontent.com/juronja/homelab-configs/main/OS-Windows/windows-domain-controller/scripts/win-client-post-install.ps1 | iex
+    irm https://raw.githubusercontent.com/juronja/ssrd/refs/heads/main/WDC-Provisioning/scripts/win-client-post-install.ps1 | iex
     ```

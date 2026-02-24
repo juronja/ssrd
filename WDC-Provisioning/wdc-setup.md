@@ -11,14 +11,14 @@ Describes how to setup WDC and add users.
 
 ## Install WDC
 
-1. Deploy VM - Follow [these](https://github.com/juronja/homelab-configs/blob/main/Infrastructure/Proxmox/proxmox-VM-installs.md#windows-server-domain-controller-vm) steps.
+1. Deploy VM - Follow [these](https://github.com/juronja/ssrd/blob/main/Proxmox/proxmox-VM-installs.md#windows-server-domain-controller-vm) steps.
 
 2. Setup Static IP, AD, DNS Features, Computer name, Wazuh and Reboot
 
     Run this script inside Terminal (Administrator)
 
     ```powershell
-    irm https://raw.githubusercontent.com/juronja/ssrd/refs/heads/main/WDC%20Provisioning/scripts/win-wdc-post-install-1.ps1 | iex
+    irm https://raw.githubusercontent.com/juronja/ssrd/refs/heads/main/WDC-Provisioning/scripts/win-wdc-post-install-1.ps1 | iex
     ```
 
 3. Promote server as DC
@@ -26,7 +26,7 @@ Describes how to setup WDC and add users.
     Run this script inside Terminal (Administrator)
 
     ```powershell
-    irm https://raw.githubusercontent.com/juronja/homelab-configs/main/OS-Windows/windows-domain-controller/scripts/win-wdc-post-install-2.ps1 | iex
+    irm https://raw.githubusercontent.com/juronja/ssrd/refs/heads/main/WDC-Provisioning/scripts/win-wdc-post-install-2.ps1 | iex
     ```
 
 4. Enable Remote Desktop
