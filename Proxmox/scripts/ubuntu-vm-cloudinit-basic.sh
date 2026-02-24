@@ -98,6 +98,19 @@ else
   exit_script
 fi
 
+if VLAN1=$(whiptail --backtitle "Install - Windows Server VM" --inputbox "Set a Vlan(leave blank for default)" 8 58 --title "VLAN" --cancel-button Exit-Script 3>&1 1>&2 2>&3); then
+  if [ -z $VLAN1 ]; then
+    VLAN1="Default"
+    VLAN=""
+    echo -e "Vlan tag: $VLAN1"
+  else
+    VLAN=",tag=$VLAN1"
+    echo -e "Vlan tag: $VLAN1"
+  fi
+else
+  exit-script
+fi
+
 while true; do
   if OS_IPv4_CIDR=$(whiptail --backtitle "Install - Ubuntu VM" --inputbox "\nSet a Static IPv4 CIDR Address (/24)" 8 58 "dhcp" --title "CLOUD-INIT IPv4 CIDR" --cancel-button "Exit Script" 3>&1 1>&2 2>&3); then
     if [ -z $OS_IPv4_CIDR ]; then
@@ -169,7 +182,7 @@ GROUP_LOCAL="local-ssh-ping"
 wget -nc --directory-prefix=$IMG_LOCATION https://cloud-images.ubuntu.com/$UBUNTU_RLS/current/$UBUNTU_RLS-server-cloudimg-amd64.img
 
 # Create a VM
-qm create $NEXTID --ostype l26 --cores $CORE_COUNT --cpu $CPU --numa 1 --memory $RAM --name $VM_NAME --scsihw virtio-scsi-single --net0 virtio,bridge=vmbr0,firewall=1 --serial0 socket --vga serial0 --ipconfig0 ip=$OS_IPv4_CIDR$OS_IPv4_GW_FULL --agent enabled=1 --onboot 1
+qm create $NEXTID --ostype l26 --cores $CORE_COUNT --cpu $CPU --numa 1 --memory $RAM --name $VM_NAME --scsihw virtio-scsi-single --net0 virtio,bridge=vmbr0,firewall=1$VLAN --serial0 socket --vga serial0 --ipconfig0 ip=$OS_IPv4_CIDR$OS_IPv4_GW_FULL --agent enabled=1 --onboot 1
 
 # Import cloud image disk
 qm disk import $NEXTID $IMG_LOCATION$UBUNTU_RLS-server-cloudimg-amd64.img local-lvm --format qcow2
