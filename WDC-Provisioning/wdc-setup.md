@@ -18,7 +18,7 @@ Describes how to setup WDC and add users.
     Run this script inside Terminal (Administrator)
 
     ```powershell
-    irm https://raw.githubusercontent.com/juronja/homelab-configs/main/OS-Windows/windows-domain-controller/scripts/win-wdc-post-install-1.ps1 | iex
+    irm https://raw.githubusercontent.com/juronja/ssrd/refs/heads/main/WDC%20Provisioning/scripts/win-wdc-post-install-1.ps1 | iex
     ```
 
 3. Promote server as DC
