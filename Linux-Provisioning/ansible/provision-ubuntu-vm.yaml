@@ -1,0 +1,49 @@
+---
+- name: Install basics
+  hosts: ubuntussrd
+  # become: yes # moved to hosts config
+  tasks:
+    - name: apt update and upgrade
+      apt:
+        force_apt_get: true
+        update_cache: true
+        upgrade: safe
+        cache_valid_time: 3600
+    - name: install guest agent
+      apt:
+        name:
+        - qemu-guest-agent
+        state: present
+- name: Download and install Wazuh Agent
+  hosts: ubuntussrd
+  vars_files:
+    - vars/variables.yaml
+  tasks:
+    - name: Download
+      get_url:
+        url: https://packages.wazuh.com/{{wazuh_mng_major_version}}.x/apt/pool/main/w/wazuh-agent/wazuh-agent_{{wazuh_mng_version}}-1_amd64.deb
+        dest: /tmp/wazuh-agent.deb
+      register: download_result
+    - name: Install
+      apt:
+        deb: /tmp/wazuh-agent.deb
+      environment:
+        WAZUH_MANAGER: "{{wazuh_mng_hostname}}"
+        WAZUH_AGENT_GROUP: 'default'
+        WAZUH_AGENT_NAME: "{{ inventory_hostname_short }}"
+    - name: Start and enable
+      service:
+        name: wazuh-agent
+        enabled: yes
+        state: started
+    - name: Get status
+      command: systemctl is-active wazuh-agent
+      register: wazuh_status
+      failed_when: false 
+    - name: Display status
+      debug:
+        msg: "Wazuh agent status: {{ wazuh_status.stdout }}"
+    - name: Remove installer
+      file:
+        path: /tmp/wazuh-agent.deb
+        state: absent
