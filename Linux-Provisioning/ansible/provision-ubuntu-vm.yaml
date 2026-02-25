@@ -23,7 +23,6 @@
       get_url:
         url: https://packages.wazuh.com/{{wazuh_mng_major_version}}.x/apt/pool/main/w/wazuh-agent/wazuh-agent_{{wazuh_mng_version}}-1_amd64.deb
         dest: /tmp/wazuh-agent.deb
-      register: download_result
     - name: Install
       apt:
         deb: /tmp/wazuh-agent.deb
