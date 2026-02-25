@@ -20,7 +20,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/juronja/ssrd/refs/heads/
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/juronja/ssrd/refs/heads/main/Proxmox/scripts/ubuntu-vm-cloudinit-basic.sh)"
 ```
 
-- POST INSTALL - Edit SSH KEY cloud-init before starting
+- ⚠️ POST INSTALL - Add SSH KEY in cloud-init before starting VM
 
 ## Windows 11 VM
 
