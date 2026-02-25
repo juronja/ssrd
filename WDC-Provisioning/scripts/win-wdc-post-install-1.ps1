@@ -75,7 +75,6 @@ if ($confirmation -match "^(y|yes)$") {
     $wazuhMngrVersion = Read-Host "Enter your current Wazuh Manager version to match the right agent version. (eg. 4.14.3)"
     $majorVersion = $wazuhMngrVersion.Split('.')[0]
 
-    # winget install -e --id Wazuh.WazuhAgent -s winget --override "/q WAZUH_MANAGER=$wazuhFQDN WAZUH_AGENT_GROUP=default WAZUH_AGENT_NAME=$newName"
     Invoke-WebRequest https://packages.wazuh.com/$majorVersion.x/windows/wazuh-agent-$wazuhMngrVersion-1.msi -OutFile $env:tmp\wazuh-agent
     msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER=$wazuhFQDN WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME=$newName
     Start-Sleep -Seconds 5
