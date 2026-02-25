@@ -5,7 +5,7 @@ Write-Host "Getting user input ... " -ForegroundColor Cyan
 # Computer name variable
 $newName = ""
 while ([string]::IsNullOrWhiteSpace($newName)) {
-    $inputName = Read-Host "Enter the new name for this server machine (Required)"
+    $inputName = Read-Host "Enter the new name for this machine (Required)"
 
     if ([string]::IsNullOrWhiteSpace($inputName)) {
         Write-Host "❌ Computer name cannot be empty." -ForegroundColor Red
@@ -47,6 +47,7 @@ if ($confirmation -match "^(y|yes)$") {
 
     Invoke-WebRequest https://packages.wazuh.com/$majorVersion.x/windows/wazuh-agent-$wazuhMngrVersion-1.msi -OutFile $env:tmp\wazuh-agent
     msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER=$wazuhFQDN WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME=$newName
+    Start-Sleep -Seconds 15
 
     Write-Host "✔️ Wazuh Agent installed." -ForegroundColor Green
 } else {
@@ -54,6 +55,4 @@ if ($confirmation -match "^(y|yes)$") {
 }
 
 Write-Host "✔️ Script finished, restarting..." -ForegroundColor Green
-Start-Sleep -Seconds 5
-
 Restart-Computer -Force
