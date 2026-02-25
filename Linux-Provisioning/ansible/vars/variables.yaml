@@ -1,3 +1,5 @@
+
+# Wazuh variables
 wazuh_mng_hostname: wazuh.lan
-wazuh_mng_version: 4.14.3
-wazuh_mng_major_version: 4
+wazuh_mng_version: 4.14.3 # Keep here the same varsion as the Wazuh manager
+wazuh_mng_major_version: 4 # Keep here the same varsion as the Wazuh manager
