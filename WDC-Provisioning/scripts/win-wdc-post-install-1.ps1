@@ -42,6 +42,7 @@ Write-Host "✔️ Configuring adapter successfull." -ForegroundColor Green
 
 # Install necessary roles and management tools
 Write-Host "Installing AD, DNS, IIS services roles and management tools ... This can take a few minutes (Patience)" -ForegroundColor Cyan
+Install-WindowsFeature -Name AD-Domain-Services, DNS, Web-Server -IncludeManagementTools
 Write-Host "✔️ Roles and management tools installed successfully." -ForegroundColor Green
 
 # DNS Forwarding to gateway Setup
