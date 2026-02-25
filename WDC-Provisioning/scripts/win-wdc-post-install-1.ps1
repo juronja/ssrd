@@ -42,7 +42,6 @@ Write-Host "✔️ Configuring adapter successfull." -ForegroundColor Green
 
 # Install necessary roles and management tools
 Write-Host "Installing AD, DNS, IIS services roles and management tools ... This can take a few minutes (Patience)" -ForegroundColor Cyan
-Install-WindowsFeature -Name AD-Domain-Services, DNS, Web-Server -IncludeManagementTools
 Write-Host "✔️ Roles and management tools installed successfully." -ForegroundColor Green
 
 # DNS Forwarding to gateway Setup
@@ -76,9 +75,9 @@ if ($confirmation -match "^(y|yes)$") {
     $majorVersion = $wazuhMngrVersion.Split('.')[0]
 
     # winget install -e --id Wazuh.WazuhAgent -s winget --override "/q WAZUH_MANAGER=$wazuhFQDN WAZUH_AGENT_GROUP=default WAZUH_AGENT_NAME=$newName"
-
     Invoke-WebRequest https://packages.wazuh.com/$majorVersion.x/windows/wazuh-agent-$wazuhMngrVersion-1.msi -OutFile $env:tmp\wazuh-agent
     msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER=$wazuhFQDN WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME=$newName
+    Start-Sleep -Seconds 5
 
     # Enable IIS logs
     $configPath = "C:\Program Files (x86)\ossec-agent\ossec.conf"
@@ -108,4 +107,5 @@ if ($confirmation -match "^(y|yes)$") {
 
 # Computer Rename
 Write-Host "Renaming computer to $newName and restarting..." -ForegroundColor Cyan
+Start-Sleep -Seconds 3
 Rename-Computer -NewName $newName -Restart -Force
