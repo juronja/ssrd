@@ -13,7 +13,9 @@ Describes how to setup WDC and add users.
 
 1. Deploy VM - Follow [these](https://github.com/juronja/ssrd/blob/main/Proxmox/proxmox-VM-installs.md#windows-server-domain-controller-vm) steps.
 
-2. Setup Static IP, AD, DNS Features, Computer name, Wazuh and Reboot
+2. ⚠️ Install all Windows updates before proceeeding. If not below scripts might throw errors
+
+3. Setup Static IP, AD, DNS Features, Computer name, Wazuh and Reboot
 
     Run this script inside Terminal (Administrator)
 
@@ -21,7 +23,7 @@ Describes how to setup WDC and add users.
     irm https://raw.githubusercontent.com/juronja/ssrd/refs/heads/main/WDC-Provisioning/scripts/win-wdc-post-install-1.ps1 | iex
     ```
 
-3. Promote server as DC
+4. Promote server as DC
 
     Run this script inside Terminal (Administrator)
 
@@ -29,7 +31,7 @@ Describes how to setup WDC and add users.
     irm https://raw.githubusercontent.com/juronja/ssrd/refs/heads/main/WDC-Provisioning/scripts/win-wdc-post-install-2.ps1 | iex
     ```
 
-4. Enable Remote Desktop
+5. Enable Remote Desktop
 
     Server Manager > Local Server > Remote Desktop > Allow RDC
 
