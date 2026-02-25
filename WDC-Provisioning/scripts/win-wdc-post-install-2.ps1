@@ -2,7 +2,6 @@
 
 # Compare password function
 # Safely compares two SecureString objects without decrypting them.
-# Outputs $true if they are equal, or $false otherwise.
 function Compare-SecureString {
   param(
     [Security.SecureString]$secureString1,
@@ -36,7 +35,7 @@ function Compare-SecureString {
   }
 }
 
-# Domain Information Gathering ---
+# Domain Information Gathering
 $domainName = Read-Host "Enter the Root Domain Name (e.g., ad.lan)"
 if ([string]::IsNullOrWhiteSpace($domainName)) {
     Write-Host "❌ Domain Name cannot be empty." -ForegroundColor Red
@@ -71,8 +70,8 @@ Write-Host "Promoting server to Domain Controller..." -ForegroundColor Cyan
 Write-Host "System will REBOOT automatically upon completion." -ForegroundColor Cyan
 
 Install-ADDSForest `
-    -DomainName "ad.lan" `
-    -DomainNetbiosName "AD" `
+    -DomainName $domainName `
+    -DomainNetbiosName $domainNetbiosName `
     -InstallDns:$true `
     -SafeModeAdministratorPassword $dsrmPassword `
     -NoRebootOnCompletion:$false `
