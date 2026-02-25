@@ -1,0 +1,8 @@
+    # - name: Create wazuh group
+    #   group:
+    #     name: wazuh
+    #     state: present
+    # - name: Create wazuh user and add to group
+    #   user:
+    #     name: wazuh
+    #     group: wazuh
