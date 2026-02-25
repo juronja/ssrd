@@ -42,7 +42,11 @@ if ($confirmation -match "^(y|yes)$") {
     Write-Host "Installing Wazuh..." -ForegroundColor Cyan
 
     $wazuhFQDN = Read-Host "Enter the Wazuh FQDN (eg. wazuh.lan)"
-    winget install -e --id Wazuh.WazuhAgent -s winget --override "/q WAZUH_MANAGER=$wazuhFQDN WAZUH_AGENT_GROUP=default WAZUH_AGENT_NAME=$newName"
+    $wazuhMngrVersion = Read-Host "Enter your current Wazuh Manager version to match the right agent version. (eg. 4.14.3)"
+    $majorVersion = $wazuhMngrVersion.Split('.')[0]
+
+    Invoke-WebRequest https://packages.wazuh.com/$majorVersion.x/windows/wazuh-agent-$wazuhMngrVersion-1.msi -OutFile $env:tmp\wazuh-agent
+    msiexec.exe /i $env:tmp\wazuh-agent /q WAZUH_MANAGER=$wazuhFQDN WAZUH_AGENT_GROUP='default' WAZUH_AGENT_NAME=$newName
 
     Write-Host "✔️ Wazuh Agent installed." -ForegroundColor Green
 } else {
