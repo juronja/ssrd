@@ -1,0 +1,23 @@
+# ubuntussrd:
+#   hosts:
+#     ubuntu:
+#       ansible_host: ubuntu1.lan
+#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general
+#     ubuntu:
+#       ansible_host: ubuntu2.lan
+#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general
+#     ubuntu:
+#       ansible_host: ubuntu3.lan
+#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general
+#     ansible_user: ubuntu
+#     ansible_become: yes
+
+ubuntussrd:
+  hosts:
+    ubuntu1.lan
+    # ubuntu2.lan
+    # ubuntu3.lan
+  vars:
+    ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general
+    ansible_user: ubuntu
+    ansible_become: yes
