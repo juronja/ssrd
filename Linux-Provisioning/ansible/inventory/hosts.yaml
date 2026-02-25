@@ -1,16 +1,20 @@
+# Unique key for each
+
 # ubuntussrd:
 #   hosts:
 #     ubuntu:
 #       ansible_host: ubuntu1.lan
-#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general
+#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general1
 #     ubuntu:
 #       ansible_host: ubuntu2.lan
-#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general
+#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general2
 #     ubuntu:
 #       ansible_host: ubuntu3.lan
-#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general
+#       ansible_ssh_private_key_file: ~/.ssh/id_ubuntu-general3
 #     ansible_user: ubuntu
 #     ansible_become: yes
+
+# Single key for all
 
 ubuntussrd:
   hosts:
