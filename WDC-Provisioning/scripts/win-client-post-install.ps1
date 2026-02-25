@@ -54,6 +54,6 @@ if ($confirmation -match "^(y|yes)$") {
 }
 
 Write-Host "✔️ Script finished, restarting..." -ForegroundColor Green
-Start-Sleep -Seconds 3
+Start-Sleep -Seconds 5
 
 Restart-Computer -Force
